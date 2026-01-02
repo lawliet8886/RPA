@@ -26,17 +26,18 @@ jobs:
       - name: Aceitar licenças do Android SDK
         run: yes | sdkmanager --licenses >/dev/null
 
-      - name: Setup Gradle (sem wrapper)
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "8.7"
+      - name: Instalar unzip
+        run: sudo apt-get update && sudo apt-get install -y unzip
 
-      - name: Debug - mostrar arquivos importantes
+      - name: Baixar Gradle oficial (sem wrapper)
+        shell: bash
         run: |
-          echo "=== RAIZ ==="
-          ls -la
-          echo "=== gradle/wrapper ==="
-          ls -la gradle/wrapper || true
+          set -e
+          GRADLE_VERSION=8.7
+          curl -fsSL "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" -o gradle.zip
+          unzip -q gradle.zip
+          echo "$PWD/gradle-${GRADLE_VERSION}/bin" >> $GITHUB_PATH
+          gradle -v
 
       - name: Build Debug APK (com logs)
         shell: bash
