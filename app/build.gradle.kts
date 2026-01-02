@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    // ✅ NECESSÁRIO para Compose com Kotlin 2.x
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
