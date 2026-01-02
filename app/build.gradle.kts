@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 
-    // ✅ NECESSÁRIO para Compose com Kotlin 2.x
+    // ✅ Obrigatório com Kotlin 2.x + Compose
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
@@ -39,9 +39,10 @@ android {
         compose = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.15"
-    }
+    // ❌ REMOVIDO: com Kotlin 2.x isso não é mais o caminho certo
+    // composeOptions {
+    //     kotlinCompilerExtensionVersion = "1.5.15"
+    // }
 
     packaging {
         resources {
